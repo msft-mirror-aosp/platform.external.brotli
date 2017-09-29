@@ -17,7 +17,6 @@ cc_library {
             enabled: true,
         },
     },
-    host_ldlibs: ["-lm"],
     stl: "none",
 }
 
