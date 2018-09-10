@@ -11,7 +11,7 @@ case "$1" in
 
 		case "${CC}" in
 		    "gcc-"*)
-			which ${CC} || brew install homebrew/versions/gcc$(echo "${CC#*-}" | sed 's/\.//')
+			which ${CC} || brew install $(echo "${CC}" | sed 's/\-/@/') || brew link --overwrite $(echo "${CC}" | sed 's/\-/@/')
 			;;
 		esac
 
@@ -51,8 +51,18 @@ case "$1" in
 		cd java/org/brotli
 		mvn install && cd integration && mvn verify
 		;;
+	    "autotools")
+		./bootstrap && ./configure && make
+		;;
+	    "fuzz")
+		./c/fuzz/test_fuzzer.sh
+		;;
 	    "bazel")
-		bazel test -c opt ...:all
+		bazel build -c opt ...:all &&
+		cd go && bazel test -c opt ...:all && cd .. &&
+		cd java && bazel test -c opt ...:all && cd .. &&
+		cd js && bazel test -c opt ...:all && cd .. &&
+		cd research && bazel build -c opt ...:all && cd ..
 		;;
 	esac
 	;;
