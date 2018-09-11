@@ -19,7 +19,7 @@
 #include <cstdio>
 #include <cstdlib>  /* exit, EXIT_FAILURE */
 
-#if !defined(CHECK)
+#ifndef CHECK
 #define CHECK(X) if (!(X)) exit(EXIT_FAILURE);
 #endif
 
