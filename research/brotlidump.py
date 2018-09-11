@@ -1467,17 +1467,16 @@ class Layout:
         #we use it for display until now; definition comes below
         lengthCode = LengthAlphabet('#'+alphabet.name)
         lengthIter = iter(lengths)
-        lengthsLeft = len(lengths)
-        while total<32 and lengthsLeft>0:
-            lengthsLeft -= 1
+        while total<32:
             newSymbol = next(lengthIter)
             lol.description = str(lengthCode[newSymbol])
             length = self.verboseRead(lol)
             if length:
                 codeLengths[newSymbol] = length
                 total += 32>>length
+            if total>=32:
+                break
         if total>32: raise ValueError("Stream format")
-        if len(codeLengths)==1: codeLengths[list(codeLengths.keys())[0]] = 0
         #Now set the encoding of the lengthCode
         lengthCode.setLength(codeLengths)
         print("***** Lengths for {} will be coded as:".format(alphabet.name))
