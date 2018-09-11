@@ -4,23 +4,18 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include <stdlib.h>
 
 #include <brotli/decode.h>
 
 // Entry point for LibFuzzer.
-int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
+extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
   size_t addend = 0;
   if (size > 0)
     addend = data[size - 1] & 7;
   const uint8_t* next_in = data;
 
   const int kBufferSize = 1024;
-  uint8_t* buffer = (uint8_t*) malloc(kBufferSize);
-  if (!buffer) {
-    // OOM is out-of-scope here.
-    return 0;
-  }
+  uint8_t* buffer = new uint8_t[kBufferSize];
   /* The biggest "magic number" in brotli is 16MiB - 16, so no need to check
      the cases with much longer output. */
   const size_t total_out_limit = (addend == 0) ? (1 << 26) : (1 << 24);
@@ -53,6 +48,6 @@ int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
   }
 
   BrotliDecoderDestroyInstance(state);
-  free(buffer);
+  delete[] buffer;
   return 0;
 }
