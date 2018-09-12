@@ -8,7 +8,6 @@ package org.brotli.wrapper.dec;
 
 import static org.junit.Assert.assertEquals;
 
-import org.brotli.integration.BrotliJniTestBase;
 import org.brotli.integration.BundleHelper;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -24,7 +23,13 @@ import org.junit.runners.AllTests;
 
 /** Tests for {@link org.brotli.wrapper.dec.BrotliDecoderChannel}. */
 @RunWith(AllTests.class)
-public class BrotliDecoderChannelTest extends BrotliJniTestBase {
+public class BrotliDecoderChannelTest {
+
+  // TODO: remove when Bazel get JNI support.
+  static {
+    System.load(new java.io.File(new java.io.File(System.getProperty("java.library.path")),
+        "liblibjni.so").getAbsolutePath());
+  }
 
   static InputStream getBundle() throws IOException {
     return new FileInputStream(System.getProperty("TEST_BUNDLE"));

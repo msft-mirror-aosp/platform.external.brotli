@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-void LLVMFuzzerTestOneInput(const uint8_t* data, size_t size);
+extern "C" void LLVMFuzzerTestOneInput(const uint8_t* data, size_t size);
 
 int main(int argc, char* *argv) {
   if (argc != 2) {

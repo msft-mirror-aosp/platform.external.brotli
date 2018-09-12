@@ -34,10 +34,6 @@ public class BrotliInputStream extends InputStream {
     this(source, DEFAULT_BUFFER_SIZE);
   }
 
-  public void setEager(boolean eager) {
-    decoder.setEager(eager);
-  }
-
   @Override
   public void close() throws IOException {
     decoder.close();
@@ -53,16 +49,7 @@ public class BrotliInputStream extends InputStream {
     if (decoder.closed) {
       throw new IOException("read after close");
     }
-    int decoded;
-    // Iterate until at leat one byte is decoded, or EOF reached.
-    while (true) {
-      decoded = decoder.decode();
-      if (decoded != 0) {
-        break;
-      }
-    }
-
-    if (decoded == -1) {
+    if (decoder.decode() == -1) {
       return -1;
     }
     return decoder.buffer.get() & 0xFF;
