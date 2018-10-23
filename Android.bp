@@ -16,6 +16,7 @@
 cc_library {
     name: "libbrotli",
     host_supported: true,
+    recovery_available: true,
     cflags: [
         "-Werror",
         "-O2",
