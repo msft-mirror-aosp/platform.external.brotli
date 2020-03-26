@@ -19,10 +19,16 @@ cc_library_static {
     vendor_available: true,
     recovery_available: true,
 
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.adbd",
+    ],
+
     visibility: [
         "//bootable/recovery:__subpackages__",
         "//external/bsdiff:__subpackages__",
         "//external/puffin:__subpackages__",
+        "//system/core/adb:__subpackages__",
         "//system/update_engine:__subpackages__",
     ],
 
@@ -38,6 +44,9 @@ cc_library_static {
     ],
     target: {
         linux_bionic: {
+            enabled: true,
+        },
+        windows: {
             enabled: true,
         },
     },
