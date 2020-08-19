@@ -29,6 +29,7 @@ cc_library_static {
         "//external/bsdiff:__subpackages__",
         "//external/puffin:__subpackages__",
         "//system/core/adb:__subpackages__",
+        "//system/core/fs_mgr/libsnapshot:__subpackages__",
         "//system/update_engine:__subpackages__",
     ],
 
