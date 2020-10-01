@@ -18,6 +18,7 @@ cc_library_static {
     host_supported: true,
     vendor_available: true,
     recovery_available: true,
+    ramdisk_available: true,
 
     apex_available: [
         "//apex_available:platform",
@@ -29,6 +30,7 @@ cc_library_static {
         "//external/bsdiff:__subpackages__",
         "//external/puffin:__subpackages__",
         "//system/core/adb:__subpackages__",
+        "//system/core/fs_mgr/libsnapshot:__subpackages__",
         "//system/update_engine:__subpackages__",
     ],
 
