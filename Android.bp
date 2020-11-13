@@ -156,4 +156,7 @@ cc_fuzz {
     static_libs: ["libbrotli"],
     srcs: ["c/fuzz/decode_fuzzer.c"],
     corpus: [":brotli-fuzzer-corpus"],
+    fuzz_config: {
+        componentid: 128577
+    },
 }
