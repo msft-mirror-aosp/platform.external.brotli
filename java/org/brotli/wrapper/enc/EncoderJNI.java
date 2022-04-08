@@ -27,13 +27,9 @@ class EncoderJNI {
   static class Wrapper {
     protected final long[] context = new long[5];
     private final ByteBuffer inputBuffer;
-    private boolean fresh = true;
 
     Wrapper(int inputBufferSize, int quality, int lgwin)
         throws IOException {
-      if (inputBufferSize <= 0) {
-        throw new IOException("buffer size must be positive");
-      }
       this.context[1] = inputBufferSize;
       this.context[2] = quality;
       this.context[3] = lgwin;
@@ -60,7 +56,6 @@ class EncoderJNI {
         throw new IllegalStateException("pushing input to encoder over previous input");
       }
       context[1] = op.ordinal();
-      fresh = false;
       nativePush(context, length);
     }
 
@@ -91,7 +86,6 @@ class EncoderJNI {
       if (!isSuccess() || !hasMoreOutput()) {
         throw new IllegalStateException("pulling while data is not ready");
       }
-      fresh = false;
       return nativePull(context);
     }
 

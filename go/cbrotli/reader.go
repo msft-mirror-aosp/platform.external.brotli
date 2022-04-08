@@ -82,9 +82,6 @@ func (r *Reader) Close() error {
 }
 
 func (r *Reader) Read(p []byte) (n int, err error) {
-	if r.state == nil {
-		return 0, errReaderClosed
-	}
 	if int(C.BrotliDecoderHasMoreOutput(r.state)) == 0 && len(r.in) == 0 {
 		m, readErr := r.src.Read(r.buf)
 		if m == 0 {

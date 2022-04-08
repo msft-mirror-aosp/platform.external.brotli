@@ -44,27 +44,27 @@ matrix:
     ## Test that fuzzer is compiling / working.
     ###
     - os: linux
-      env: BUILD_SYSTEM=fuzz C_COMPILER=clang-7 CXX_COMPILER=clang++-7 ASAN_OPTIONS=detect_leaks=0
+      env: BUILD_SYSTEM=fuzz C_COMPILER=clang-5.0 CXX_COMPILER=clang++-5.0 ASAN_OPTIONS=detect_leaks=0
       addons:
         apt:
           sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-xenial-7
+          - llvm-toolchain-trusty-5.0
           packages:
-          - clang-7
+          - clang-5.0
 
     ###
     ## clang on Linux
     ###
     - os: linux
-      env: BUILD_SYSTEM=cmake C_COMPILER=clang-7 CXX_COMPILER=clang++-7
+      env: BUILD_SYSTEM=cmake C_COMPILER=clang-5.0 CXX_COMPILER=clang++-5.0
       addons:
         apt:
           sources:
-          - llvm-toolchain-xenial-7
+          - llvm-toolchain-trusty-5.0
           - ubuntu-toolchain-r-test
           packages:
-          - clang-7
+          - clang-5.0
     - os: linux
       env: BUILD_SYSTEM=cmake C_COMPILER=clang-3.5 CXX_COMPILER=clang++-3.5
       addons:
@@ -92,9 +92,8 @@ matrix:
     ###
     ## PGI Community Edition on Linux
     ###
-    # Installer is currently broken
-    #- os: linux
-    #  env: BUILD_SYSTEM=cmake C_COMPILER=pgcc CXX_COMPILER=pgc++
+    - os: linux
+      env: BUILD_SYSTEM=cmake C_COMPILER=pgcc CXX_COMPILER=pgc++
 
     ###
     ## Python 2.7 and 3.6 builds on Linux
@@ -146,38 +145,35 @@ matrix:
     ## Sanitizers
     ###
     - os: linux
-      env: BUILD_SYSTEM=cmake C_COMPILER=clang-7 CXX_COMPILER=clang++-7 SANITIZER=address ASAN_OPTIONS=detect_leaks=0
+      env: BUILD_SYSTEM=cmake C_COMPILER=clang-5.0 CXX_COMPILER=clang++-5.0 SANITIZER=address ASAN_OPTIONS=detect_leaks=0
       addons:
         apt:
           sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-xenial-7
+          - llvm-toolchain-trusty-5.0
           packages:
-          - clang-7
+          - clang-5.0
     - os: linux
-      env: BUILD_SYSTEM=cmake C_COMPILER=clang-7 CXX_COMPILER=clang++-7 SANITIZER=thread
+      env: BUILD_SYSTEM=cmake C_COMPILER=clang-5.0 CXX_COMPILER=clang++-5.0 SANITIZER=thread
       addons:
         apt:
           sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-xenial-7
+          - llvm-toolchain-trusty-5.0
           packages:
-          - clang-7
+          - clang-5.0
     - os: linux
-      env: BUILD_SYSTEM=cmake C_COMPILER=clang-7 CXX_COMPILER=clang++-7 SANITIZER=undefined CFLAGS="-fno-sanitize-recover=undefined,integer"
+      env: BUILD_SYSTEM=cmake C_COMPILER=clang-5.0 CXX_COMPILER=clang++-5.0 SANITIZER=undefined CFLAGS="-fno-sanitize-recover=undefined,integer"
       addons:
         apt:
           sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-xenial-7
+          - llvm-toolchain-trusty-5.0
           packages:
-          - clang-7
+          - clang-5.0
 
     - os: linux
       env: BUILD_SYSTEM=maven
-      jdk:
-      # maven + jdk11 + javadoc == trouble
-      - openjdk10
       language: java
 
     - os: linux
@@ -196,7 +192,8 @@ matrix:
 
     - os: osx
       env: BUILD_SYSTEM=bazel
-      osx_image: xcode11.3
+      # Latest image with Java 1.8 (required to install Bazel).
+      osx_image: xcode9.3
       language: java
 
 before_install:

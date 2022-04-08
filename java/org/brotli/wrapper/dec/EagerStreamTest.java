@@ -56,7 +56,7 @@ public class EagerStreamTest extends BrotliJniTestBase {
       }
     };
     BrotliInputStream reader = new BrotliInputStream(source);
-    reader.enableEagerOutput();
+    reader.setEager(true);
     int count = 0;
     while (true) {
       log.append("^").append(count);

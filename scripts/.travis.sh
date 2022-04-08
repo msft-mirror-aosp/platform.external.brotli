@@ -6,7 +6,7 @@ case "$1" in
     "install")
 	case "${TRAVIS_OS_NAME}" in
 	    "osx")
-		brew update >/dev/null
+		brew update
 		brew install binutils
 
 		case "${CC}" in
@@ -17,7 +17,6 @@ case "$1" in
 
 		case "${BUILD_SYSTEM}" in
 		    "bazel")
-			brew cask install homebrew/cask-versions/adoptopenjdk8
 			brew install bazel
 			;;
 		esac

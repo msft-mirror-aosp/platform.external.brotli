@@ -375,7 +375,7 @@ public class EagerStreamTest {
 
     ps = new ProxyStream(new ByteArrayInputStream(DATA));
     reader = new BrotliInputStream(ps, 1);
-    reader.enableEagerOutput();
+    reader.setEager(true);
     reader.read(buffer);
     reader.close();
     int eagerReadBytes = ps.readBytes;

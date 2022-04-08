@@ -5,55 +5,57 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # MIT
 
-TEST_DEPS = [
-    ":dec",
-    "@maven//:junit_junit",
-]
-
 java_library(
     name = "dec",
     srcs = glob(
         ["*.java"],
         exclude = ["*Test*.java"],
     ),
-    proguard_specs = ["proguard.pgcfg"],
-    resource_jars = ["//:license"],
+    proguard_specs = ["proguard.cfg"],
 )
 
-load(":build_defs.bzl", "brotli_java_test")
+java_library(
+    name = "test_lib",
+    testonly = 1,
+    srcs = glob(["*Test*.java"]),
+    deps = [
+        ":dec",
+        "@junit_junit//jar",
+    ],
+)
 
-brotli_java_test(
+java_test(
     name = "BitReaderTest",
-    srcs = ["BitReaderTest.java"],
-    deps = TEST_DEPS,
+    test_class = "org.brotli.dec.BitReaderTest",
+    runtime_deps = [":test_lib"],
 )
 
-brotli_java_test(
+java_test(
     name = "DecodeTest",
-    srcs = ["DecodeTest.java"],
-    deps = TEST_DEPS,
+    test_class = "org.brotli.dec.DecodeTest",
+    runtime_deps = [":test_lib"],
 )
 
-brotli_java_test(
+java_test(
     name = "DictionaryTest",
-    srcs = ["DictionaryTest.java"],
-    deps = TEST_DEPS,
+    test_class = "org.brotli.dec.DictionaryTest",
+    runtime_deps = [":test_lib"],
 )
 
-brotli_java_test(
+java_test(
     name = "EagerStreamTest",
-    srcs = ["EagerStreamTest.java"],
-    deps = TEST_DEPS,
+    test_class = "org.brotli.dec.EagerStreamTest",
+    runtime_deps = [":test_lib"],
 )
 
-brotli_java_test(
+java_test(
     name = "SynthTest",
-    srcs = ["SynthTest.java"],
-    deps = TEST_DEPS,
+    test_class = "org.brotli.dec.SynthTest",
+    runtime_deps = [":test_lib"],
 )
 
-brotli_java_test(
+java_test(
     name = "TransformTest",
-    srcs = ["TransformTest.java"],
-    deps = TEST_DEPS,
+    test_class = "org.brotli.dec.TransformTest",
+    runtime_deps = [":test_lib"],
 )

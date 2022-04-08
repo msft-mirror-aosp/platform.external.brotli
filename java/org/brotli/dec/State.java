@@ -13,7 +13,6 @@ final class State {
   byte[] contextModes;
   byte[] contextMap;
   byte[] distContextMap;
-  byte[] distExtraBits;
   byte[] output;
   byte[] byteBuffer;  // BitReader
 
@@ -22,10 +21,9 @@ final class State {
   int[] intBuffer;  // BitReader
   int[] rings;
   int[] blockTrees;
-  int[] literalTreeGroup;
-  int[] commandTreeGroup;
-  int[] distanceTreeGroup;
-  int[] distOffset;
+  int[] hGroup0;
+  int[] hGroup1;
+  int[] hGroup2;
 
   long accumulator64;  // BitReader: pre-fetched bits.
 
@@ -50,16 +48,18 @@ final class State {
   int maxDistance;
   int distRbIdx;
   int trivialLiteralContext;
-  int literalTreeIdx;
-  int commandTreeIdx;
+  int literalTreeIndex;
+  int literalTree;
   int j;
   int insertLength;
   int contextMapSlice;
   int distContextMapSlice;
   int contextLookupOffset1;
   int contextLookupOffset2;
+  int treeCommandOffset;
   int distanceCode;
   int numDirectDistanceCodes;
+  int distancePostfixMask;
   int distancePostfixBits;
   int distance;
   int copyLength;
@@ -73,19 +73,6 @@ final class State {
   int ringBufferBytesWritten;
   int ringBufferBytesReady;
   int isEager;
-  int isLargeWindow;
-
-  // Compound dictionary
-  int cdNumChunks;
-  int cdTotalSize;
-  int cdBrIndex;
-  int cdBrOffset;
-  int cdBrLength;
-  int cdBrCopied;
-  byte[][] cdChunks;
-  int[] cdChunkOffsets;
-  int cdBlockBits;
-  byte[] cdBlockMap;
 
   InputStream input; // BitReader
 

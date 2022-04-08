@@ -13,7 +13,6 @@ java_library(
         ["*.java"],
         exclude = ["*Test*.java"],
     ),
-    resource_jars = ["//:license"],
 )
 
 java_library(
@@ -24,7 +23,7 @@ java_library(
         ":dec",
         "//org/brotli/integration:brotli_jni_test_base",
         "//org/brotli/integration:bundle_helper",
-        "@maven//:junit_junit",
+        "@junit_junit//jar",
     ],
 )
 
@@ -40,6 +39,7 @@ filegroup(
 
 java_test(
     name = "BrotliDecoderChannelTest",
+    test_class = "org.brotli.wrapper.dec.BrotliDecoderChannelTest",
     size = "large",
     data = [
         ":brotli_jni",  # Bazel JNI workaround
@@ -49,12 +49,12 @@ java_test(
         "-DBROTLI_JNI_LIBRARY=$(location :brotli_jni)",
         "-DTEST_BUNDLE=$(location :test_bundle)",
     ],
-    test_class = "org.brotli.wrapper.dec.BrotliDecoderChannelTest",
     runtime_deps = [":test_lib"],
 )
 
 java_test(
     name = "BrotliInputStreamTest",
+    test_class = "org.brotli.wrapper.dec.BrotliInputStreamTest",
     size = "large",
     data = [
         ":brotli_jni",  # Bazel JNI workaround
@@ -64,12 +64,12 @@ java_test(
         "-DBROTLI_JNI_LIBRARY=$(location :brotli_jni)",
         "-DTEST_BUNDLE=$(location :test_bundle)",
     ],
-    test_class = "org.brotli.wrapper.dec.BrotliInputStreamTest",
     runtime_deps = [":test_lib"],
 )
 
 java_test(
     name = "DecoderTest",
+    test_class = "org.brotli.wrapper.dec.DecoderTest",
     size = "large",
     data = [
         ":brotli_jni",  # Bazel JNI workaround
@@ -79,6 +79,5 @@ java_test(
         "-DBROTLI_JNI_LIBRARY=$(location :brotli_jni)",
         "-DTEST_BUNDLE=$(location :test_bundle)",
     ],
-    test_class = "org.brotli.wrapper.dec.DecoderTest",
     runtime_deps = [":test_lib"],
 )

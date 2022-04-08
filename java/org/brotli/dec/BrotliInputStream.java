@@ -84,16 +84,8 @@ public class BrotliInputStream extends InputStream {
     }
   }
 
-  public void attachDictionaryChunk(byte[] data) {
-    Decode.attachDictionaryChunk(state, data);
-  }
-
-  public void enableEagerOutput() {
-    Decode.enableEagerOutput(state);
-  }
-
-  public void enableLargeWindow() {
-    Decode.enableLargeWindow(state);
+  public void setEager(boolean eager) {
+    state.isEager = eager ? 1 : 0;
   }
 
   /**
