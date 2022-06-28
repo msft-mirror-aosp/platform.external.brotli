@@ -54,6 +54,7 @@ cc_library_static {
     ramdisk_available: true,
     vendor_ramdisk_available: true,
 
+    min_sdk_version: "apex_inherit",
     apex_available: [
         "//apex_available:platform",
         "com.android.adbd",
@@ -113,6 +114,8 @@ java_library {
     srcs: ["java/**/*.java"],
     exclude_srcs: ["java/**/*Test.java"],
     sdk_version: "current",
+    // TODO(b/237039251) use "apex_inherit" when Java modules support it
+    min_sdk_version: "29",
 }
 
 // TODO(b/171429704): Remove this genrule and use the fuzz_data.zip
