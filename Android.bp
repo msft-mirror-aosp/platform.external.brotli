@@ -102,6 +102,21 @@ cc_binary {
     static_libs: ["libbrotli"],
 }
 
+cc_library_shared {
+    name: "libbrotli_encoder_jni",
+    host_supported: true,
+    srcs: [
+        "java/org/brotli/wrapper/enc/encoder_jni.cc",
+    ],
+    static_libs: [
+      "libnativehelper_lazy",
+      "libbrotli",
+    ],
+    cflags: [
+        "-Wno-unused-parameter",
+    ],
+}
+
 //
 // Support for brotli in java code.
 //
