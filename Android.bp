@@ -131,6 +131,8 @@ java_library {
     sdk_version: "current",
     // TODO(b/237039251) use "apex_inherit" when Java modules support it
     min_sdk_version: "29",
+    // b/267831518: Pin tradefed and dependencies to Java 11.
+    java_version: "11",
 }
 
 // TODO(b/171429704): Remove this genrule and use the fuzz_data.zip
