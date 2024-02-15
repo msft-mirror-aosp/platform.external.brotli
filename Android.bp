@@ -66,6 +66,7 @@ cc_library_static {
         "//external/puffin:__subpackages__",
         "//packages/modules/adb:__subpackages__",
         "//system/core/fs_mgr/libsnapshot:__subpackages__",
+        "//system/extras/partition_tools:__subpackages__",
         "//system/update_engine:__subpackages__",
     ],
 
@@ -101,6 +102,7 @@ cc_binary {
         },
     },
     static_libs: ["libbrotli"],
+    stl: "none",
 }
 
 cc_library_shared {
