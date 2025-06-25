@@ -55,6 +55,7 @@ cc_library_static {
     vendor_ramdisk_available: true,
 
     min_sdk_version: "apex_inherit",
+    sdk_version: "current",
     apex_available: [
         "//apex_available:platform",
         "com.android.adbd",
