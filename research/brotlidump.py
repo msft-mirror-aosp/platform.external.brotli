@@ -14,6 +14,8 @@ from itertools import accumulate, repeat
 from collections import defaultdict, deque
 from functools import partial
 
+DICTIONARY_PATH = 'dictionary.bin'
+
 class InvalidStream(Exception): pass
 #lookup table
 L, I, D = "literal", "insert&copy", "distance"
@@ -1263,7 +1265,7 @@ class WordList:
              10, 10, 10,  9,  9,  8,  7,  7,  8,  7,
               7,  6,  6,  5,  5]
     def __init__(self):
-        self.file = open('dict', 'rb')
+        self.file = open(DICTIONARY_PATH, 'rb')
         self.compileActions()
 
     def word(self, size, dist):
@@ -1704,7 +1706,7 @@ class Layout:
         """Read literal context modes.
         LSB6: lower 6 bits of last char
         MSB6: upper 6 bits of last char
-        UTF8: rougly dependent on categories:
+        UTF8: roughly dependent on categories:
             upper 4 bits depend on category of last char:
                 control/whitespace/space/ punctuation/quote/%/open/close/
                 comma/period/=/digits/ VOWEL/CONSONANT/vowel/consonant
@@ -2340,9 +2342,12 @@ __test__ = {
 
 }
 
-if __name__=='__main__':
+if __name__ == '__main__':
+    import os
     import sys
-    if len(sys.argv)>1:
+    here = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+    DICTIONARY_PATH = os.path.realpath(os.path.join(here, DICTIONARY_PATH))
+    if len(sys.argv) > 1:
         l = Layout(BitStream(open(sys.argv[1],'rb').read()))
         l.processStream()
     else:

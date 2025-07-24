@@ -133,7 +133,10 @@ java_library {
     host_supported: true,
     hostdex: true,
     srcs: ["java/**/*.java"],
-    exclude_srcs: ["java/**/*Test.java"],
+    exclude_srcs: [
+        "java/org/brotli/wrapper/android/*.java",
+        "java/**/*Test.java",
+    ],
     sdk_version: "current",
     // TODO(b/237039251) use "apex_inherit" when Java modules support it
     min_sdk_version: "29",
