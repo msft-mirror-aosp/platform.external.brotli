@@ -11,6 +11,9 @@ third_party {
   }
   version: "v1.0.9"
   license_type: NOTICE
+  security {
+    tag: "NVD-CPE2.3:cpe:/a:google:brotli:1.0.9"
+  }
   last_upgrade_date {
     year: 2020
     month: 8
